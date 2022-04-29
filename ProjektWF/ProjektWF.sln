@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektWF", "ProjektWF\ProjektWF.csproj", "{6B6C78C4-7E55-4D0C-A97B-586AD0DE2067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt", "..\Projekt\Projekt.csproj", "{EC169AC1-BD2F-441B-B02F-F4F09A24831A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B6C78C4-7E55-4D0C-A97B-586AD0DE2067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B6C78C4-7E55-4D0C-A97B-586AD0DE2067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B6C78C4-7E55-4D0C-A97B-586AD0DE2067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B6C78C4-7E55-4D0C-A97B-586AD0DE2067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC169AC1-BD2F-441B-B02F-F4F09A24831A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC169AC1-BD2F-441B-B02F-F4F09A24831A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC169AC1-BD2F-441B-B02F-F4F09A24831A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC169AC1-BD2F-441B-B02F-F4F09A24831A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCD53069-E0BC-4528-9F7C-7FE4B7401C7A}
+	EndGlobalSection
+EndGlobal

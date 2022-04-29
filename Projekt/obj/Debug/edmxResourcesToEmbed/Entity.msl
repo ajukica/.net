@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FastFoodMDFModelStoreContainer" CdmEntityContainer="Entites">
+    <EntitySetMapping Name="Artiklis">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.Artikli">
+        <MappingFragment StoreEntitySet="Artikli">
+          <ScalarProperty Name="ArtikliID" ColumnName="ArtikliID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategorijas">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.Kategorija">
+        <MappingFragment StoreEntitySet="Kategorija">
+          <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kupacs">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.Kupac">
+        <MappingFragment StoreEntitySet="Kupac">
+          <ScalarProperty Name="KupacID" ColumnName="KupacID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Racuns">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.Racun">
+        <MappingFragment StoreEntitySet="Racun">
+          <ScalarProperty Name="RacunID" ColumnName="RacunID" />
+          <ScalarProperty Name="KupacID" ColumnName="KupacID" />
+          <ScalarProperty Name="ZaposlenikID" ColumnName="ZaposlenikID" />
+          <ScalarProperty Name="Brojracuna" ColumnName="Brojracuna" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RacunArtiklis">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.RacunArtikli">
+        <MappingFragment StoreEntitySet="RacunArtikli">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RacunID" ColumnName="RacunID" />
+          <ScalarProperty Name="ArtikliID" ColumnName="ArtikliID" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zaposleniks">
+      <EntityTypeMapping TypeName="FastFood.MDFModel.Zaposlenik">
+        <MappingFragment StoreEntitySet="Zaposlenik">
+          <ScalarProperty Name="ZaposlenikID" ColumnName="ZaposlenikID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

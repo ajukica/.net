@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FastFood.MDFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artikli">
+          <Key>
+            <PropertyRef Name="ArtikliID" />
+          </Key>
+          <Property Name="ArtikliID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="KategorijaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijaID" />
+          </Key>
+          <Property Name="KategorijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kupac">
+          <Key>
+            <PropertyRef Name="KupacID" />
+          </Key>
+          <Property Name="KupacID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="RacunID" />
+          </Key>
+          <Property Name="RacunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KupacID" Type="int" Nullable="false" />
+          <Property Name="ZaposlenikID" Type="int" Nullable="false" />
+          <Property Name="Brojracuna" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RacunArtikli">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RacunID" Type="int" Nullable="false" />
+          <Property Name="ArtikliID" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="ZaposlenikID" />
+          </Key>
+          <Property Name="ZaposlenikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Artikli_ToTable">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+          <End Role="Artikli" Type="Self.Artikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorija">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Artikli">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_ToTable">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="ZaposlenikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_ToTable_1">
+          <End Role="Kupac" Type="Self.Kupac" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kupac">
+              <PropertyRef Name="KupacID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="KupacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="RacunArtikli" Type="Self.RacunArtikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="RacunID" />
+            </Principal>
+            <Dependent Role="RacunArtikli">
+              <PropertyRef Name="RacunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable_1">
+          <End Role="Artikli" Type="Self.Artikli" Multiplicity="1" />
+          <End Role="RacunArtikli" Type="Self.RacunArtikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artikli">
+              <PropertyRef Name="ArtikliID" />
+            </Principal>
+            <Dependent Role="RacunArtikli">
+              <PropertyRef Name="ArtikliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FastFoodMDFModelStoreContainer">
+          <EntitySet Name="Artikli" EntityType="Self.Artikli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorija" EntityType="Self.Kategorija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kupac" EntityType="Self.Kupac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RacunArtikli" EntityType="Self.RacunArtikli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zaposlenik" EntityType="Self.Zaposlenik" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Artikli_ToTable" Association="Self.FK_Artikli_ToTable">
+            <End Role="Kategorija" EntitySet="Kategorija" />
+            <End Role="Artikli" EntitySet="Artikli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_ToTable" Association="Self.FK_Racun_ToTable">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_ToTable_1" Association="Self.FK_Racun_ToTable_1">
+            <End Role="Kupac" EntitySet="Kupac" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="Self.FK_Table_ToTable">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="RacunArtikli" EntitySet="RacunArtikli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable_1" Association="Self.FK_Table_ToTable_1">
+            <End Role="Artikli" EntitySet="Artikli" />
+            <End Role="RacunArtikli" EntitySet="RacunArtikli" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FastFood.MDFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artikli">
+          <Key>
+            <PropertyRef Name="ArtikliID" />
+          </Key>
+          <Property Name="ArtikliID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cijena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="KategorijaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kategorija" Relationship="Self.FK_Artikli_ToTable" FromRole="Artikli" ToRole="Kategorija" />
+          <NavigationProperty Name="RacunArtiklis" Relationship="Self.FK_Table_ToTable_1" FromRole="Artikli" ToRole="RacunArtikli" />
+        </EntityType>
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijaID" />
+          </Key>
+          <Property Name="KategorijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Artiklis" Relationship="Self.FK_Artikli_ToTable" FromRole="Kategorija" ToRole="Artikli" />
+        </EntityType>
+        <EntityType Name="Kupac">
+          <Key>
+            <PropertyRef Name="KupacID" />
+          </Key>
+          <Property Name="KupacID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Racuns" Relationship="Self.FK_Racun_ToTable_1" FromRole="Kupac" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="RacunID" />
+          </Key>
+          <Property Name="RacunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KupacID" Type="Int32" Nullable="false" />
+          <Property Name="ZaposlenikID" Type="Int32" Nullable="false" />
+          <Property Name="Brojracuna" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kupac" Relationship="Self.FK_Racun_ToTable_1" FromRole="Racun" ToRole="Kupac" />
+          <NavigationProperty Name="Zaposlenik" Relationship="Self.FK_Racun_ToTable" FromRole="Racun" ToRole="Zaposlenik" />
+          <NavigationProperty Name="RacunArtiklis" Relationship="Self.FK_Table_ToTable" FromRole="Racun" ToRole="RacunArtikli" />
+        </EntityType>
+        <EntityType Name="RacunArtikli">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RacunID" Type="Int32" Nullable="false" />
+          <Property Name="ArtikliID" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artikli" Relationship="Self.FK_Table_ToTable_1" FromRole="RacunArtikli" ToRole="Artikli" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_Table_ToTable" FromRole="RacunArtikli" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="ZaposlenikID" />
+          </Key>
+          <Property Name="ZaposlenikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Racuns" Relationship="Self.FK_Racun_ToTable" FromRole="Zaposlenik" ToRole="Racun" />
+        </EntityType>
+        <Association Name="FK_Artikli_ToTable">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+          <End Role="Artikli" Type="Self.Artikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorija">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Artikli">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable_1">
+          <End Role="Artikli" Type="Self.Artikli" Multiplicity="1" />
+          <End Role="RacunArtikli" Type="Self.RacunArtikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artikli">
+              <PropertyRef Name="ArtikliID" />
+            </Principal>
+            <Dependent Role="RacunArtikli">
+              <PropertyRef Name="ArtikliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_ToTable_1">
+          <End Role="Kupac" Type="Self.Kupac" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kupac">
+              <PropertyRef Name="KupacID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="KupacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_ToTable">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="ZaposlenikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="RacunArtikli" Type="Self.RacunArtikli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="RacunID" />
+            </Principal>
+            <Dependent Role="RacunArtikli">
+              <PropertyRef Name="RacunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entites" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artiklis" EntityType="Self.Artikli" />
+          <EntitySet Name="Kategorijas" EntityType="Self.Kategorija" />
+          <EntitySet Name="Kupacs" EntityType="Self.Kupac" />
+          <EntitySet Name="Racuns" EntityType="Self.Racun" />
+          <EntitySet Name="RacunArtiklis" EntityType="Self.RacunArtikli" />
+          <EntitySet Name="Zaposleniks" EntityType="Self.Zaposlenik" />
+          <AssociationSet Name="FK_Artikli_ToTable" Association="Self.FK_Artikli_ToTable">
+            <End Role="Kategorija" EntitySet="Kategorijas" />
+            <End Role="Artikli" EntitySet="Artiklis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable_1" Association="Self.FK_Table_ToTable_1">
+            <End Role="Artikli" EntitySet="Artiklis" />
+            <End Role="RacunArtikli" EntitySet="RacunArtiklis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_ToTable_1" Association="Self.FK_Racun_ToTable_1">
+            <End Role="Kupac" EntitySet="Kupacs" />
+            <End Role="Racun" EntitySet="Racuns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_ToTable" Association="Self.FK_Racun_ToTable">
+            <End Role="Zaposlenik" EntitySet="Zaposleniks" />
+            <End Role="Racun" EntitySet="Racuns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="Self.FK_Table_ToTable">
+            <End Role="Racun" EntitySet="Racuns" />
+            <End Role="RacunArtikli" EntitySet="RacunArtiklis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FastFoodMDFModelStoreContainer" CdmEntityContainer="Entites">
+          <EntitySetMapping Name="Artiklis">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.Artikli">
+              <MappingFragment StoreEntitySet="Artikli">
+                <ScalarProperty Name="ArtikliID" ColumnName="ArtikliID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorijas">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.Kategorija">
+              <MappingFragment StoreEntitySet="Kategorija">
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kupacs">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.Kupac">
+              <MappingFragment StoreEntitySet="Kupac">
+                <ScalarProperty Name="KupacID" ColumnName="KupacID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racuns">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.Racun">
+              <MappingFragment StoreEntitySet="Racun">
+                <ScalarProperty Name="RacunID" ColumnName="RacunID" />
+                <ScalarProperty Name="KupacID" ColumnName="KupacID" />
+                <ScalarProperty Name="ZaposlenikID" ColumnName="ZaposlenikID" />
+                <ScalarProperty Name="Brojracuna" ColumnName="Brojracuna" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RacunArtiklis">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.RacunArtikli">
+              <MappingFragment StoreEntitySet="RacunArtikli">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RacunID" ColumnName="RacunID" />
+                <ScalarProperty Name="ArtikliID" ColumnName="ArtikliID" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zaposleniks">
+            <EntityTypeMapping TypeName="FastFood.MDFModel.Zaposlenik">
+              <MappingFragment StoreEntitySet="Zaposlenik">
+                <ScalarProperty Name="ZaposlenikID" ColumnName="ZaposlenikID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
