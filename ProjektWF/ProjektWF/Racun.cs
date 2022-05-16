@@ -1,9 +1,12 @@
 ﻿
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Newtonsoft.Json;
 using ProjektWF.Modeli;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -403,7 +406,10 @@ namespace ProjektWF
             }
         }
 
+       
+
     }
+    
 }
             
 

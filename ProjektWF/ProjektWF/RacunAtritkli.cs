@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Newtonsoft.Json;
 using Projekt;
+using Projekt.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,10 +22,9 @@ namespace ProjektWF
         public RacunAtritkli()
         {
             InitializeComponent();
-            //string racunID = Racun.racunID;           
+            string racunID = btnRacun.RacunID;
             popuniKategorije();
-
-            //textRacunId.Text = racunID;            
+            textBoxRacunID.Text = racunID;            
         }
 
         //string brojRacuna = RacunAtritkli.brojRacuna;
@@ -35,7 +38,6 @@ namespace ProjektWF
                 {
                     using (HttpContent content = res.Content)
                     {
-                        string statusCode = res.StatusCode.ToString() + " - " + ((int)res.StatusCode).ToString();
                         string data = await content.ReadAsStringAsync();
 
                         if (data != null)
@@ -74,10 +76,8 @@ namespace ProjektWF
                     using (HttpResponseMessage res = await client.GetAsync("https://localhost:44306/artikli/getartiklkategorija/" + id))
                     {
                         using (HttpContent content = res.Content)
-                        {
-                            string statusCode = res.StatusCode.ToString() + " - " + ((int)res.StatusCode).ToString();
-                            
-                            string data = await content.ReadAsStringAsync();
+                        {                            
+                           string data = await content.ReadAsStringAsync();
 
                             if (data != null)
                             {
@@ -117,5 +117,310 @@ namespace ProjektWF
             comboBoxArtikli.Items.Clear();
 
         }
+
+        async Task<string> PrikaziCijene()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.GetAsync("https://localhost:44306/artikli/getcijena"))
+                {
+                    using (HttpContent content = res.Content)
+                    {                      
+                        string data = await content.ReadAsStringAsync();
+
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        async Task<string> PrikaziImeArtikl()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.GetAsync("https://localhost:44306/artikli/getID"))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        
+                        string data = await content.ReadAsStringAsync();
+
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
+        }
+        private async void textBoxKolicina_TextChangedAsync(object sender, EventArgs e)
+        {
+            try
+            {
+                var response = await PrikaziCijene();
+                var podaci = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(response);
+
+                var artiklCijena = podaci.FirstOrDefault(x => x.Key == comboBoxArtikli.Text).Value;
+
+                textBoxUkupno.Text = (artiklCijena * (int.Parse(textBoxKolicina.Text))).ToString();
+            }
+            catch (HttpRequestException x)
+            {
+                MessageBox.Show(x.Message);
+            }
+
+        }
+        private async void comboBoxKolicina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var response = await PrikaziCijene();
+                var podaci = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(response);
+
+                var artiklCijena = podaci.FirstOrDefault(x => x.Key == comboBoxArtikli.Text).Value;
+
+                textBoxUkupno.Text = (artiklCijena * (int.Parse(textBoxKolicina.SelectedText))).ToString();
+            }
+            catch (HttpRequestException x)
+            {
+                MessageBox.Show(x.Message);
+            }
+
+        }
+
+        private async void btnDodaj_Click(object sender, EventArgs e)
+        {
+            async Task<string> dodajArtikl()
+            {
+                string racunId = textBoxRacunID.Text.Trim();
+
+                var response = await PrikaziImeArtikl();
+                var podaci = JsonConvert.DeserializeObject<Dictionary<string, int>>(response);
+
+                string artiklID = podaci.FirstOrDefault(x => x.Key == comboBoxArtikli.Text).Value.ToString();
+
+
+                string kolicina = textBoxKolicina.Text;
+                string cijena = textBoxUkupno.Text.ToString();
+
+                if (racunId.Length == 0 || artiklID.Length == 0 || kolicina.Length == 0 || cijena.Length == 0)
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                    return null;
+                }
+
+                var uneseniPodaci = new Dictionary<string, string>
+                {        
+                    { "RacunID", racunId },
+                    { "ArtikliID", artiklID },           
+                    { "Kolicina", kolicina }
+                };
+
+                var unos = new FormUrlEncodedContent(uneseniPodaci);
+
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage res = await client.PostAsync("https://localhost:44306/racunartikli/noviracunartikl", unos))
+                    {
+                        using (HttpContent content = res.Content)
+                        {
+                            string statusCode = res.StatusCode.ToString() + " - " + ((int)res.StatusCode).ToString();
+                            MessageBox.Show(statusCode);
+
+                            string data = await content.ReadAsStringAsync();
+
+                            if (data != null)
+                            {
+                                return data;
+                            }
+                        }
+                    }
+                }
+
+                return string.Empty;
+
+            }
+
+            try
+            {
+                await dodajArtikl();
+            }
+
+            catch (HttpRequestException x)
+            {
+                MessageBox.Show(x.Message);
+            }
+            catch (FormatException x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
+
+        private async void btnPrikazi_Click(object sender, EventArgs e)
+        {
+            async Task<string> Prikazi(int id)
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage res = await client.GetAsync("https://localhost:44306/racunartikli/getracunartiklibyid/" + id))
+                    {
+                        using (HttpContent content = res.Content)
+                        {
+                            
+                            string data = await content.ReadAsStringAsync();
+
+                            if (data != null)
+                            {
+                                return data;
+                            }
+                        }
+                    }
+                }
+                return string.Empty;
+            }
+
+            try
+            {
+                var response = await Prikazi(int.Parse(textBoxRacunID.Text.Trim()));
+
+                var podaci = JsonConvert.DeserializeObject<List<Detalji>>(response);
+                dataGridViewDetalji.DataSource = podaci;
+            }
+            catch (HttpRequestException x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
+
+       
+            private void btnIspis_Click(object sender, EventArgs e)
+            {
+                void Ispis()
+                {
+                    var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
+                    string path = $"C:\\Users\\Korisnik\\Desktop{btnRacun.RacunID}.BR.pdf";
+
+                    PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
+                    pdfDoc.Open();
+
+                    //var imagepath = @"C:\Users\tbozi\source\repos\Projekt\logo.png";
+
+                    //using (FileStream fs = new FileStream(imagepath, FileMode.Open))
+                    //{
+                    //    var png = iTextSharp.text.Image.GetInstance(System.Drawing.Image.FromStream(fs),
+                    //            ImageFormat.Png);
+                    //    png.ScalePercent(2f);
+                    //    png.SetAbsolutePosition(pdfDoc.Left, pdfDoc.Top);
+                    //    pdfDoc.Add(png);
+                    //}
+
+                    var Naslov = new Paragraph("Fast Food");
+                    pdfDoc.Add(Naslov);
+
+
+                    var spacer = new Paragraph("")
+                    {
+                        SpacingBefore = 10f,
+                        SpacingAfter = 10f,
+                    };
+
+                    pdfDoc.Add(spacer);
+
+                    var headerTable = new PdfPTable(new[] { .75f, 2f })
+                    {
+                        HorizontalAlignment = Left,
+                        WidthPercentage = 75,
+                        DefaultCell = { MinimumHeight = 22f }
+                    };
+
+
+                    headerTable.AddCell("RacunID");
+                    headerTable.AddCell(textBoxRacunID.Text.Trim());
+                    headerTable.AddCell("Broj Racuna");
+                    headerTable.AddCell(btnRacun.BrojRacuna);
+                    headerTable.AddCell("Izdao");
+                    headerTable.AddCell("Korisnik");
+
+                    pdfDoc.Add(headerTable);
+                    pdfDoc.Add(spacer);
+
+                    var columnCount = dataGridViewDetalji.ColumnCount;
+                    var columnWidths = new[] { 1f, 1f, 1.5f, 1f, 1f, 1f };
+
+                    var table = new PdfPTable(columnWidths)
+                    {
+                        HorizontalAlignment = Left,
+                        WidthPercentage = 100,
+                        DefaultCell = { MinimumHeight = 22f }
+                    };
+
+                    var cell = new PdfPCell(new Phrase("Stavke Računa"))
+                    {
+                        Colspan = columnCount,
+                        HorizontalAlignment = 1,
+                        MinimumHeight = 30f
+                    };
+
+                    table.AddCell(cell);
+
+                    //headers
+
+                    dataGridViewDetalji.Columns
+                        .OfType<DataGridViewColumn>()
+                        .ToList()
+                        .ForEach(c => table.AddCell(c.Name));
+
+                    // rows
+
+                    dataGridViewDetalji.Rows
+                        .OfType<DataGridViewRow>()
+                        .ToList()
+                        .ForEach(r =>
+                        {
+                            var cells = r.Cells.OfType<DataGridViewCell>().ToList();
+                            cells.ForEach(c => table.AddCell(c.Value.ToString()));
+                        });
+
+
+                    decimal ukupnaCijena = 0;
+
+                    for (int i = 0; i < dataGridViewDetalji.Rows.Count; ++i)
+                    {
+                        ukupnaCijena += Convert.ToDecimal(dataGridViewDetalji.Rows[i].Cells[5].Value);
+                    }
+
+
+                    var ukupno = new PdfPCell(new Phrase("Ukupna Cijena: " +
+                        ukupnaCijena))
+                    {
+                        Colspan = columnCount,
+                        HorizontalAlignment = 2,
+                        MinimumHeight = 30f
+                    };
+
+                    table.AddCell(ukupno);
+
+
+
+                   
+
+                    pdfDoc.Add(table);
+
+                    pdfDoc.Close();
+                    System.Diagnostics.Process.Start(path);
+                }
+
+
+                Ispis();
+
+
+            }
+        
     }
+        
 }

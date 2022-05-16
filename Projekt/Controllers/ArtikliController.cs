@@ -124,8 +124,9 @@ namespace Projekt.Controllers
                 Artikli artikli = db.Artiklis.Where(x => x.ArtikliID == id).FirstOrDefault();
                 db.Artiklis.Remove(artikli);
                 db.SaveChanges();
-            
-                
+
+
+
         }
 
         public JsonResult GetFilter(String filter)
@@ -193,7 +194,40 @@ namespace Projekt.Controllers
             return JsonConvert.SerializeObject(zaposlenik);
 
         }
+
+        public string GetCijena()
+        {
+                var Artikli = new List<Artikli>();
+                Artikli = db.Artiklis.ToList();
+
+                var artikl = new Dictionary<string, decimal>();
+
+                foreach (var a in Artikli)
+                {
+                    artikl.Add(a.Naziv, a.Cijena);
+                }
+
+            return JsonConvert.SerializeObject(artikl);
+
+        }
+
+        public string GetID()
+        {          
+                var Artikli = new List<Artikli>();
+                Artikli = db.Artiklis.ToList();
+
+                var artikl = new Dictionary<string, int>();
+
+                foreach (var a in Artikli)
+                {
+                    artikl.Add(a.Naziv, a.ArtikliID);
+                }
+
+            return JsonConvert.SerializeObject(artikl);
+
+        }
     }
+    
 }
 
 

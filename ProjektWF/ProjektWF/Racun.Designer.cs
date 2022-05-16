@@ -47,20 +47,20 @@
             this.textBoxRacunID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridRacuni = new System.Windows.Forms.DataGridView();
-            this._FastFood_MDFDataSet2 = new ProjektWF._FastFood_MDFDataSet2();
-            this.racunBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.racunTableAdapter1 = new ProjektWF._FastFood_MDFDataSet2TableAdapters.RacunTableAdapter();
             this.racunIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kupacIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.zaposlenikIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.brojracunaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.racunBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this._FastFood_MDFDataSet2 = new ProjektWF._FastFood_MDFDataSet2();
+            this.racunTableAdapter1 = new ProjektWF._FastFood_MDFDataSet2TableAdapters.RacunTableAdapter();
             this.btnIzbrisiRacun = new System.Windows.Forms.Button();
             this.btnIzmjeni = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.racunBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRacuni)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.racunBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -215,20 +215,6 @@
             this.dataGridRacuni.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRacuni_CellContentClick);
             this.dataGridRacuni.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridRacuni_MouseDoubleClick);
             // 
-            // _FastFood_MDFDataSet2
-            // 
-            this._FastFood_MDFDataSet2.DataSetName = "_FastFood_MDFDataSet2";
-            this._FastFood_MDFDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // racunBindingSource1
-            // 
-            this.racunBindingSource1.DataMember = "Racun";
-            this.racunBindingSource1.DataSource = this._FastFood_MDFDataSet2;
-            // 
-            // racunTableAdapter1
-            // 
-            this.racunTableAdapter1.ClearBeforeFill = true;
-            // 
             // racunIDDataGridViewTextBoxColumn
             // 
             this.racunIDDataGridViewTextBoxColumn.DataPropertyName = "RacunID";
@@ -253,6 +239,20 @@
             this.brojracunaDataGridViewTextBoxColumn.DataPropertyName = "Brojracuna";
             this.brojracunaDataGridViewTextBoxColumn.HeaderText = "Brojracuna";
             this.brojracunaDataGridViewTextBoxColumn.Name = "brojracunaDataGridViewTextBoxColumn";
+            // 
+            // racunBindingSource1
+            // 
+            this.racunBindingSource1.DataMember = "Racun";
+            this.racunBindingSource1.DataSource = this._FastFood_MDFDataSet2;
+            // 
+            // _FastFood_MDFDataSet2
+            // 
+            this._FastFood_MDFDataSet2.DataSetName = "_FastFood_MDFDataSet2";
+            this._FastFood_MDFDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // racunTableAdapter1
+            // 
+            this.racunTableAdapter1.ClearBeforeFill = true;
             // 
             // btnIzbrisiRacun
             // 
@@ -302,8 +302,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.racunBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRacuni)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.racunBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._FastFood_MDFDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -348,6 +348,7 @@
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Artikli.cs" />
+    <Compile Include="Models\Detalji.cs" />
     <Compile Include="Models\Kategorija.cs" />
     <Compile Include="Models\Kupac.cs" />
     <Compile Include="Models\Racun.cs" />

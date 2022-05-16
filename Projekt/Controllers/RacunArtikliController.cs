@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -47,32 +48,42 @@ namespace Projekt.Controllers
         // Dohvatćanje artikla po ID-u
         public JsonResult GetRacunArtikliById(int id)
         {
-            List<RacunArtikli> racunArtikl = new List<RacunArtikli>();
 
-                var rezultat = (from item in db.RacunArtiklis
-                                where item.ID == id
-                                select new
-                                {
-                                    item.ID,
-                                    item.RacunID,
-                                    item.ArtikliID,
-                                    item.Kolicina
-                                   
-                                }).ToList();
+            List<Detalji> racunArtikli = new List<Detalji>();
 
-                foreach (var e in rezultat)
+            var result = (from racun in db.Racuns
+                          join item in db.RacunArtiklis on racun.RacunID equals item.RacunID
+                          join artikl in db.Artiklis on item.ArtikliID equals artikl.ArtikliID
+                          join kategorija in db.Kategorijas on artikl.KategorijaID equals kategorija.KategorijaID
+                          where item.RacunID == id
+                          select new
+                          {
+                              racun.Kupac.Prezime,
+                              racun.Zaposlenik.ZaposlenikID,
+                              racun.RacunID,
+                              artikl.Naziv,
+                              kategorijaNaziv = kategorija.Naziv,
+                              item.Kolicina
+                              
+                          }).ToList();
+
+            foreach (var e in result)
+            {
+                racunArtikli.Add(new Detalji
                 {
-                    racunArtikl.Add(new RacunArtikli
-                    {
-                        ID = e.ID,
-                        RacunID = e.RacunID,
-                        ArtikliID = e.ArtikliID,
-                        Kolicina = e.Kolicina
-                    });
-                };
-            
-            return Json(racunArtikl, JsonRequestBehavior.AllowGet);
+                    RacunID = e.RacunID,
+                    kupac = e.Prezime,
+                    zaposlenikid = e.ZaposlenikID,
+                    kategorijaNaziv = e.kategorijaNaziv,
+                    naziv = e.Naziv,
+                    kolicina = e.Kolicina                 
+
+                });
+            };
+
+            return Json(racunArtikli, JsonRequestBehavior.AllowGet);
         }
+            
 
         //Umetanje novog artikla
         public void NoviRacunArtikl(RacunArtikli racunArtikli)
@@ -83,7 +94,7 @@ namespace Projekt.Controllers
                 
                     db.RacunArtiklis.Add(new RacunArtikli()
                     {
-                        ID = racunArtikli.ID,
+                      
                         RacunID= racunArtikli.RacunID,  
                         ArtikliID= racunArtikli.ArtikliID,  
                         Kolicina= racunArtikli.Kolicina 
@@ -108,15 +119,6 @@ namespace Projekt.Controllers
             }
 
         }
-
-        //public void NoviArtikl(Artikli artikli)
-        //{
-        //    using (Database db = new Database())
-        //    {
-        //        db.Artiklis.Add(artikli);
-        //        db.SaveChanges();
-        //    }
-        //}
 
 
         public void Delete(int id)
