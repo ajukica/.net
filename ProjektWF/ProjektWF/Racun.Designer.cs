@@ -132,6 +132,7 @@
             this.textKupacID.Name = "textKupacID";
             this.textKupacID.Size = new System.Drawing.Size(100, 20);
             this.textKupacID.TabIndex = 7;
+            this.textKupacID.TextChanged += new System.EventHandler(this.textKupacID_TextChanged);
             // 
             // label4
             // 
@@ -188,6 +189,7 @@
             this.textBoxRacunID.Name = "textBoxRacunID";
             this.textBoxRacunID.Size = new System.Drawing.Size(100, 20);
             this.textBoxRacunID.TabIndex = 13;
+            this.textBoxRacunID.TextChanged += new System.EventHandler(this.textBoxRacunID_TextChanged);
             // 
             // label6
             // 

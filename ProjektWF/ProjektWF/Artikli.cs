@@ -139,12 +139,14 @@ namespace ProjektWF
         {
             async Task<string> IzmjeniArtikl()
             {
-              
+                
+                string artikliId = textBoxIdArtikla.Text.Trim();
                 string kategorijaId = textBoxKategorijaId.Text.Trim();
                 string proizvodCijena = textBoxCijena.Text.Trim();
-                string artiklNaziv = textBoxCijena.Text.Trim();
+                string artiklNaziv = textBoxNazivArtikla.Text.Trim();
+                
               
-                if (kategorijaId.Length == 0 || proizvodCijena.Length == 0 || artiklNaziv.Length == 0)
+                if (kategorijaId.Length == 0 || proizvodCijena.Length == 0 || artiklNaziv.Length == 0 || artikliId.Length == 0)
                 {
                     MessageBox.Show("Sva polja moraju biti popunjena!");
                     return null;
@@ -152,6 +154,7 @@ namespace ProjektWF
 
                 var uneseniPodaci = new Dictionary<string, string>
                 {
+                    {"ArtikliID", artikliId},
                     { "KategorijaID" , kategorijaId },
                     { "Cijena", proizvodCijena },
                     { "Naziv", artiklNaziv }               

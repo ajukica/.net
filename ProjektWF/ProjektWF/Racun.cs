@@ -353,7 +353,7 @@ namespace ProjektWF
         {
             async Task<string> IzmjeniRacun()
             {
-                int id = int.Parse(textBoxRacunID.Text.Trim());
+                string id = textBoxRacunID.Text.Trim();
 
                 string racunZaposlenik = textZaposlenikID.Text.Trim();
                 string brojRacuna = textBrojRacuna.Text.Trim();
@@ -362,6 +362,7 @@ namespace ProjektWF
              
                 var uneseniPodaci = new Dictionary<string, string>
                 {
+                    {"RacunID",id },
                     { "ZaposlenikID", racunZaposlenik },
                     { "KupacID", racunKupac },
                     { "brojRacuna", brojRacuna }
@@ -406,8 +407,15 @@ namespace ProjektWF
             }
         }
 
-       
+        private void textBoxRacunID_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void textKupacID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }
