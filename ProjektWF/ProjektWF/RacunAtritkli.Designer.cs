@@ -138,6 +138,7 @@
             this.dataGridViewDetalji.Name = "dataGridViewDetalji";
             this.dataGridViewDetalji.Size = new System.Drawing.Size(423, 333);
             this.dataGridViewDetalji.TabIndex = 13;
+            this.dataGridViewDetalji.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDetalji_CellContentClick);
             // 
             // btnPrikazi
             // 

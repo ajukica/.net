@@ -31,7 +31,7 @@
             this.btnArtikli = new System.Windows.Forms.Button();
             this.btnKupac = new System.Windows.Forms.Button();
             this.btnNoviRacun = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnZaposlenici = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnArtikli
@@ -52,6 +52,7 @@
             this.btnKupac.TabIndex = 1;
             this.btnKupac.Text = "Kupac";
             this.btnKupac.UseVisualStyleBackColor = true;
+            this.btnKupac.Click += new System.EventHandler(this.btnKupac_Click);
             // 
             // btnNoviRacun
             // 
@@ -63,22 +64,22 @@
             this.btnNoviRacun.UseVisualStyleBackColor = true;
             this.btnNoviRacun.Click += new System.EventHandler(this.btnNoviRacun_Click);
             // 
-            // button3
+            // btnZaposlenici
             // 
-            this.button3.Location = new System.Drawing.Point(78, 223);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnZaposlenici.Location = new System.Drawing.Point(78, 223);
+            this.btnZaposlenici.Name = "btnZaposlenici";
+            this.btnZaposlenici.Size = new System.Drawing.Size(75, 23);
+            this.btnZaposlenici.TabIndex = 3;
+            this.btnZaposlenici.Text = "Zaposlenik";
+            this.btnZaposlenici.UseVisualStyleBackColor = true;
+            this.btnZaposlenici.Click += new System.EventHandler(this.button3_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnZaposlenici);
             this.Controls.Add(this.btnNoviRacun);
             this.Controls.Add(this.btnKupac);
             this.Controls.Add(this.btnArtikli);
@@ -93,7 +94,7 @@
         private System.Windows.Forms.Button btnArtikli;
         private System.Windows.Forms.Button btnKupac;
         private System.Windows.Forms.Button btnNoviRacun;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnZaposlenici;
     }
 }
 

@@ -59,11 +59,12 @@ namespace Projekt.Controllers
                           select new
                           {
                               racun.Kupac.Prezime,
-                              racun.Zaposlenik.ZaposlenikID,
+                              racun.Zaposlenik.Ime,
                               racun.RacunID,
                               artikl.Naziv,
                               kategorijaNaziv = kategorija.Naziv,
-                              item.Kolicina
+                              item.Kolicina,
+                              artikl.Cijena
                               
                           }).ToList();
 
@@ -72,12 +73,12 @@ namespace Projekt.Controllers
                 racunArtikli.Add(new Detalji
                 {
                     RacunID = e.RacunID,
-                    kupac = e.Prezime,
-                    zaposlenikid = e.ZaposlenikID,
-                    kategorijaNaziv = e.kategorijaNaziv,
-                    naziv = e.Naziv,
-                    kolicina = e.Kolicina                 
-
+                    Kupac = e.Prezime,
+                    Zaposlenik = e.Ime,
+                    Kategorija = e.kategorijaNaziv,
+                    Naziv = e.Naziv,
+                    Kolicina = e.Kolicina,               
+                    Cijena = e.Cijena
                 });
             };
 

@@ -79,6 +79,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kupac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kupac.Designer.cs">
+      <DependentUpon>Kupac.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modeli\ArtikliModel.cs" />
     <Compile Include="Modeli\KategorijaModel.cs" />
     <Compile Include="Modeli\KupacModel.cs" />
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kupac.resx">
+      <DependentUpon>Kupac.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

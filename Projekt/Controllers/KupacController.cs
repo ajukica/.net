@@ -11,7 +11,7 @@ namespace Projekt.Controllers
     public class KupacController : Controller
     {
         Entites db = new Entites();
-        // GET: Kupac
+
         public ActionResult Index()
         {
             return View();

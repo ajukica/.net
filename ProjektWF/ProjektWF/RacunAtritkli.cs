@@ -303,7 +303,7 @@ namespace ProjektWF
                 void Ispis()
                 {
                     var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
-                    string path = $"C:\\Users\\Korisnik\\Desktop{btnRacun.RacunID}.BR.pdf";
+                    string path = $"C:\\Users\\Korisnik\\Desktop\\RacunBR{btnRacun.BrojRacuna}.pdf";
 
                     PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
                     pdfDoc.Open();
@@ -319,7 +319,7 @@ namespace ProjektWF
                     //    pdfDoc.Add(png);
                     //}
 
-                    var Naslov = new Paragraph("Fast Food");
+                    var Naslov = new Paragraph("Fast Food Original");
                     pdfDoc.Add(Naslov);
 
 
@@ -343,14 +343,13 @@ namespace ProjektWF
                     headerTable.AddCell(textBoxRacunID.Text.Trim());
                     headerTable.AddCell("Broj Racuna");
                     headerTable.AddCell(btnRacun.BrojRacuna);
-                    headerTable.AddCell("Izdao");
-                    headerTable.AddCell("Korisnik");
+                   
 
                     pdfDoc.Add(headerTable);
                     pdfDoc.Add(spacer);
 
                     var columnCount = dataGridViewDetalji.ColumnCount;
-                    var columnWidths = new[] { 1f, 1f, 1.5f, 1f, 1f, 1f };
+                    var columnWidths = new[] { 1f, 1f, 1.5f, 1f, 1f, 1f,1f };
 
                     var table = new PdfPTable(columnWidths)
                     {
@@ -359,7 +358,7 @@ namespace ProjektWF
                         DefaultCell = { MinimumHeight = 22f }
                     };
 
-                    var cell = new PdfPCell(new Phrase("Stavke Računa"))
+                    var cell = new PdfPCell(new Phrase("Stavke Racuna"))
                     {
                         Colspan = columnCount,
                         HorizontalAlignment = 1,
@@ -391,7 +390,7 @@ namespace ProjektWF
 
                     for (int i = 0; i < dataGridViewDetalji.Rows.Count; ++i)
                     {
-                        ukupnaCijena += Convert.ToDecimal(dataGridViewDetalji.Rows[i].Cells[5].Value);
+                        ukupnaCijena += Convert.ToDecimal(dataGridViewDetalji.Rows[i].Cells[6].Value);
                     }
 
 
@@ -399,15 +398,11 @@ namespace ProjektWF
                         ukupnaCijena))
                     {
                         Colspan = columnCount,
-                        HorizontalAlignment = 2,
+                        HorizontalAlignment = 7,
                         MinimumHeight = 30f
                     };
 
-                    table.AddCell(ukupno);
-
-
-
-                   
+                    table.AddCell(ukupno);  
 
                     pdfDoc.Add(table);
 
@@ -420,7 +415,11 @@ namespace ProjektWF
 
 
             }
-        
+
+        private void dataGridViewDetalji_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
         
 }

@@ -33,5 +33,11 @@ namespace ProjektWF
         {
 
         }
+
+        private void btnKupac_Click(object sender, EventArgs e)
+        {
+            Kupac kupac = new Kupac();
+            kupac.ShowDialog();
+        }
     }
 }
