@@ -105,6 +105,12 @@
     <Compile Include="RacunAtritkli.Designer.cs">
       <DependentUpon>RacunAtritkli.cs</DependentUpon>
     </Compile>
+    <Compile Include="Zaposlenik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zaposlenik.Designer.cs">
+      <DependentUpon>Zaposlenik.cs</DependentUpon>
+    </Compile>
     <Compile Include="_FastFood_MDFDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +125,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_FastFood_MDFDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_FastFood_MDFDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_FastFood_MDFDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_FastFood_MDFDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_FastFood_MDFDataSet4.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Artikli.resx">
       <DependentUpon>Artikli.cs</DependentUpon>
@@ -143,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RacunAtritkli.resx">
       <DependentUpon>RacunAtritkli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zaposlenik.resx">
+      <DependentUpon>Zaposlenik.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -186,6 +205,28 @@
     </None>
     <None Include="_FastFood_MDFDataSet2.xss">
       <DependentUpon>_FastFood_MDFDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="_FastFood_MDFDataSet3.xsc">
+      <DependentUpon>_FastFood_MDFDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="_FastFood_MDFDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_FastFood_MDFDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_FastFood_MDFDataSet3.xss">
+      <DependentUpon>_FastFood_MDFDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="_FastFood_MDFDataSet4.xsc">
+      <DependentUpon>_FastFood_MDFDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="_FastFood_MDFDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_FastFood_MDFDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_FastFood_MDFDataSet4.xss">
+      <DependentUpon>_FastFood_MDFDataSet4.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

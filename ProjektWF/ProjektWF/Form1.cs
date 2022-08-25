@@ -31,7 +31,8 @@ namespace ProjektWF
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Zaposlenik zaposlenik = new Zaposlenik();
+            zaposlenik.ShowDialog();
         }
 
         private void btnKupac_Click(object sender, EventArgs e)

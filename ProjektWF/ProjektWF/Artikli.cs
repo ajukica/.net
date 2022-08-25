@@ -25,7 +25,7 @@ namespace ProjektWF
 
         }
 
-        // GREŠKA -- NEĆE DA IZBRIŠE IZ BAZE JER IMA REFERENCU 
+       
         private async void btnIzbrisiArtikl_Click(object sender, EventArgs e)
         {
 
@@ -194,6 +194,11 @@ namespace ProjektWF
             {
                 MessageBox.Show(x.Message);
             }
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

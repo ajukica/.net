@@ -118,9 +118,9 @@ namespace Projekt.Controllers
 
         public void Delete(int id)
         {
-         
-                Kupac kupci = db.Kupacs.Where(x => x.KupacID == id).FirstOrDefault();
-                db.Kupacs.Remove(kupci);
+
+            Kupac kupci = db.Kupacs.Where(x => x.KupacID == id).FirstOrDefault();
+               db.Kupacs.Remove(kupci);
                db.SaveChanges();
             
 

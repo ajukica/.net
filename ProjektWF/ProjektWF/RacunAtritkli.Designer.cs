@@ -189,6 +189,7 @@
             this.Controls.Add(this.comboBoxKategorija);
             this.Name = "RacunAtritkli";
             this.Text = "RacunAtritkli";
+            this.Load += new System.EventHandler(this.RacunAtritkli_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetalji)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

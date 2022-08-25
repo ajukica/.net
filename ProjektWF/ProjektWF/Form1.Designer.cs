@@ -36,9 +36,9 @@
             // 
             // btnArtikli
             // 
-            this.btnArtikli.Location = new System.Drawing.Point(78, 162);
+            this.btnArtikli.Location = new System.Drawing.Point(41, 87);
             this.btnArtikli.Name = "btnArtikli";
-            this.btnArtikli.Size = new System.Drawing.Size(75, 23);
+            this.btnArtikli.Size = new System.Drawing.Size(122, 84);
             this.btnArtikli.TabIndex = 0;
             this.btnArtikli.Text = "Artikli";
             this.btnArtikli.UseVisualStyleBackColor = true;
@@ -46,11 +46,11 @@
             // 
             // btnKupac
             // 
-            this.btnKupac.Location = new System.Drawing.Point(185, 162);
+            this.btnKupac.Location = new System.Drawing.Point(196, 87);
             this.btnKupac.Name = "btnKupac";
-            this.btnKupac.Size = new System.Drawing.Size(75, 23);
+            this.btnKupac.Size = new System.Drawing.Size(138, 84);
             this.btnKupac.TabIndex = 1;
-            this.btnKupac.Text = "Kupac";
+            this.btnKupac.Text = "Kupci";
             this.btnKupac.UseVisualStyleBackColor = true;
             this.btnKupac.Click += new System.EventHandler(this.btnKupac_Click);
             // 
@@ -66,11 +66,11 @@
             // 
             // btnZaposlenici
             // 
-            this.btnZaposlenici.Location = new System.Drawing.Point(78, 223);
+            this.btnZaposlenici.Location = new System.Drawing.Point(105, 194);
             this.btnZaposlenici.Name = "btnZaposlenici";
-            this.btnZaposlenici.Size = new System.Drawing.Size(75, 23);
+            this.btnZaposlenici.Size = new System.Drawing.Size(141, 67);
             this.btnZaposlenici.TabIndex = 3;
-            this.btnZaposlenici.Text = "Zaposlenik";
+            this.btnZaposlenici.Text = "Zaposlenici";
             this.btnZaposlenici.UseVisualStyleBackColor = true;
             this.btnZaposlenici.Click += new System.EventHandler(this.button3_Click);
             // 

@@ -420,6 +420,11 @@ namespace ProjektWF
         {
 
         }
+
+        private void RacunAtritkli_Load(object sender, EventArgs e)
+        {
+
+        }
     }
         
 }

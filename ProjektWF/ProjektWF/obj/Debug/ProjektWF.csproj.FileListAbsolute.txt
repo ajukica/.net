@@ -46,3 +46,4 @@ C:\Users\Korisnik\Desktop\Projekt\ProjektWF\ProjektWF\bin\Debug\System.Web.Razor
 C:\Users\Korisnik\Desktop\Projekt\ProjektWF\ProjektWF\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Korisnik\Desktop\Projekt\ProjektWF\ProjektWF\obj\Debug\ProjektWF.exe.config
 C:\Users\Korisnik\Desktop\Projekt\ProjektWF\ProjektWF\obj\Debug\ProjektWF.Kupac.resources
+C:\Users\Korisnik\Desktop\Projekt\ProjektWF\ProjektWF\obj\Debug\ProjektWF.Zaposlenik.resources
